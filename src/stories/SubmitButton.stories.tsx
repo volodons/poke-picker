@@ -7,9 +7,20 @@ export default {
   component: SubmitButton,
 } as Meta;
 
-const Template: Story<SubmitButtonProps> = (args: any) => <SubmitButton {...args} />;
+const Template: Story<SubmitButtonProps> = (args) => <SubmitButton {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
   onSubmit: () => console.log('Submit clicked!'),
+};
+
+Default.parameters = {
+  docs: {
+    description: {
+      component: 'A button for submitting forms with a star icon and a downward chevron.',
+    },
+    source: {
+      code: '<SubmitButton onSubmit={() => console.log("Submit clicked!")} />',
+    },
+  },
 };
