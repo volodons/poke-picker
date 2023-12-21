@@ -1,24 +1,21 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import Select from "../select/select";
 
 const Form: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data: any) => {
     console.log(`Hello, ${data}`);
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="firstName">
+    <div className="container mx-auto mt-8">
+      <form className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md" onSubmit={handleSubmit(onSubmit)}>
+        <label className="block mb-4">
           First name:
           <input
-            id="firstName"
+            className="mt-1 p-2 w-full border rounded-md"
             {...register("firstName", {
               required: "First name is required",
               pattern: {
@@ -27,13 +24,13 @@ const Form: React.FC = () => {
               }
             })}
           />
-          {errors.firstName && <span>{errors.firstName.message}</span>}
+          {errors.firstName && <span className="text-red-500">{errors.firstName.message}</span>}
         </label>
 
-        <label htmlFor="lastName">
+        <label className="block mb-4">
           Last name:
           <input
-            id="lastName"
+            className="mt-1 p-2 w-full border rounded-md"
             {...register("lastName", {
               required: "Last name is required",
               pattern: {
@@ -42,12 +39,13 @@ const Form: React.FC = () => {
               }
             })}
           />
-          {errors.lastName && <span>{errors.lastName.message}</span>}
+          {errors.lastName && <span className="text-red-500">{errors.lastName.message}</span>}
         </label>
 
-        <button type="submit">Submit</button>
+        <button className="bg-blue-500 text-white p-2 rounded-md" type="submit">Submit</button>
+        <Select onSelect={(selected) => setSelectedPokemon(selected)} />
       </form>
-    </>
+    </div>
   );
 };
 
