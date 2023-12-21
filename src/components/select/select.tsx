@@ -114,7 +114,7 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
           ))}
         </div>
       </div>
-      <div>
+      <div className="mt-8">
         {filteredPokemonList.map((pokemon) => (
           <button
             key={pokemon.url}

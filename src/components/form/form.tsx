@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Select from "../select/select";
 import axios from "axios";
+import { ChevronDownIcon, StarIcon } from "@heroicons/react/16/solid";
 
 const Form: React.FC = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -65,7 +66,15 @@ const Form: React.FC = () => {
 
         <Select onSelect={(selectedPokemon) => setSelectedPokemons(selectedPokemon)}/>
 
-        <button className="bg-blue-500 text-white p-2 rounded-md" type="submit">Submit</button>
+        <div className="flex justify-center m-8">
+          <button
+            className="w-40 flex items-center justify-between bg-blue-500 text-white p-2 rounded-md transition duration-300 ease-in-out transform hover:bg-blue-400 focus:outline-none focus:ring focus:border-blue-500"
+            type="submit">
+            <StarIcon className="w-6 h-6"/>
+            <span className="font-bold">Submit</span>
+            <ChevronDownIcon className="w-6 h-6"/>
+          </button>
+        </div>
       </form>
     </div>
   );
