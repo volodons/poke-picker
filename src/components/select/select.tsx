@@ -59,15 +59,20 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
   };
 
   const addToSelectedPokemons = (pokemon: Pokemon) => {
-    const isPokemonAlreadySelected = selectedPokemons.some(
-      (selectedPokemon) => selectedPokemon.url === pokemon.url
-    );
+    if (selectedPokemons.length < 4) {
+      const isPokemonAlreadySelected = selectedPokemons.some(
+        (selectedPokemon) => selectedPokemon.url === pokemon.url
+      );
 
-    if (!isPokemonAlreadySelected) {
-      const coloredPokemon = { ...pokemon, colorClass: getRandomColor() };
-      setSelectedPokemons((prevSelectedPokemons) => [...prevSelectedPokemons, coloredPokemon]);
+      if (!isPokemonAlreadySelected) {
+        const coloredPokemon = { ...pokemon, colorClass: getRandomColor() };
+        setSelectedPokemons((prevSelectedPokemons) => [...prevSelectedPokemons, coloredPokemon]);
+      }
+    } else {
+      alert("Maximum limit of 4 selected Pokémon reached");
     }
   };
+
 
   const removeFromSelectedPokemons = (urlToRemove: string) => {
     const updatedSelectedPokemons = selectedPokemons.filter(
@@ -108,7 +113,7 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
           <button
             key={pokemon.url}
             onClick={() => removeFromSelectedPokemons(pokemon.url)}
-            className={`pl-2.5 pr-2.5 pt-0.5 pb-0.5 m-1 rounded-md text-white ${pokemon.colorClass}`}
+            className={`pl-2.5 pr-2.5 pt-0.5 pb-0.5 m-1 rounded-full text-white ${pokemon.colorClass}`}
           >
             {pokemon.name} <span className="ml-2">&#10006;</span>
           </button>
