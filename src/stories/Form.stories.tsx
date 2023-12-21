@@ -5,9 +5,20 @@ import Form from '../components/form/form';
 export default {
   title: 'Components/Form',
   component: Form,
-} as Meta<typeof Form>;
+} as Meta;
 
-const Template: Story<typeof Form> = (args: any) => <Form {...args} />;
+const Template: Story<FormProps> = (args) => <Form {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};
+
+Default.parameters = {
+  docs: {
+    description: {
+      component: 'A form component for capturing user information and selecting Pokemon.',
+    },
+    source: {
+      code: '<Form />',
+    },
+  },
+};
