@@ -59,8 +59,14 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
   };
 
   const addToSelectedPokemons = (pokemon: Pokemon) => {
-    const coloredPokemon = { ...pokemon, colorClass: getRandomColor() };
-    setSelectedPokemons((prevSelectedPokemons) => [...prevSelectedPokemons, coloredPokemon]);
+    const isPokemonAlreadySelected = selectedPokemons.some(
+      (selectedPokemon) => selectedPokemon.url === pokemon.url
+    );
+
+    if (!isPokemonAlreadySelected) {
+      const coloredPokemon = { ...pokemon, colorClass: getRandomColor() };
+      setSelectedPokemons((prevSelectedPokemons) => [...prevSelectedPokemons, coloredPokemon]);
+    }
   };
 
   const removeFromSelectedPokemons = (urlToRemove: string) => {
