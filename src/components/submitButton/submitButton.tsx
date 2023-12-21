@@ -1,7 +1,7 @@
 import React from "react";
 import { StarIcon, ChevronDownIcon } from "@heroicons/react/16/solid";
 
-interface SubmitButtonProps {
+export interface SubmitButtonProps {
   onSubmit: () => void;
 }
 
