@@ -8,7 +8,7 @@ interface Pokemon {
 }
 
 interface SelectProps {
-  onSelect: (selectedPokemon: string[]) => void;
+  onSelect: (selectedPokemons: string[]) => void;
 }
 
 const Select: React.FC<SelectProps> = ({ onSelect }) => {
@@ -16,7 +16,6 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedPokemon, setSelectedPokemon] = useState<string[]>([]);
   const [selectedPokemons, setSelectedPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
@@ -66,19 +65,21 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
 
       if (!isPokemonAlreadySelected) {
         const coloredPokemon = { ...pokemon, colorClass: getRandomColor() };
-        setSelectedPokemons((prevSelectedPokemons) => [...prevSelectedPokemons, coloredPokemon]);
+        const updatedSelectedPokemons = [...selectedPokemons, coloredPokemon];
+        setSelectedPokemons(updatedSelectedPokemons);
+        onSelect(updatedSelectedPokemons);
       }
     } else {
       alert("Maximum limit of 4 selected Pokémon reached");
     }
   };
 
-
   const removeFromSelectedPokemons = (urlToRemove: string) => {
     const updatedSelectedPokemons = selectedPokemons.filter(
       (selectedPokemon) => selectedPokemon.url !== urlToRemove
     );
     setSelectedPokemons(updatedSelectedPokemons);
+    onSelect(updatedSelectedPokemons);
   };
 
   return (
@@ -91,8 +92,6 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
         multiple
         {...register('selectedPokemon', { validate: (value) => value.length === 4 })}
         onChange={() => {
-          setValue('selectedPokemon', getValues('selectedPokemon'));
-          setSelectedPokemon(getValues('selectedPokemon'));
           onSelect(getValues('selectedPokemon'));
         }}
         className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"

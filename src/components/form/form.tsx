@@ -4,10 +4,14 @@ import Select from "../select/select";
 
 const Form: React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [selectedPokemon, setSelectedPokemon] = useState<string[]>([]);
+  const [selectedPokemons, setSelectedPokemons] = useState<string[]>([]);
 
   const onSubmit = (data: any) => {
-    console.log(`Hello, ${data}`);
+    if (selectedPokemons.length === 4) {
+      console.log(`Hello, ${data}`);
+    } else {
+      alert("Please choose exactly 4 pokemons.");
+    }
   };
 
   return (
@@ -43,7 +47,7 @@ const Form: React.FC = () => {
           {errors.lastName && <span className="text-red-500">{errors.lastName.message}</span>}
         </label>
 
-        <Select onSelect={(selected) => setSelectedPokemon(selected)}/>
+        <Select onSelect={(selected) => setSelectedPokemons(selected)}/>
 
         <button className="bg-blue-500 text-white p-2 rounded-md" type="submit">Submit</button>
       </form>
