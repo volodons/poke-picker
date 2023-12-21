@@ -43,8 +43,9 @@ const Form: React.FC = () => {
           {errors.lastName && <span className="text-red-500">{errors.lastName.message}</span>}
         </label>
 
+        <Select onSelect={(selected) => setSelectedPokemon(selected)}/>
+
         <button className="bg-blue-500 text-white p-2 rounded-md" type="submit">Submit</button>
-        <Select onSelect={(selected) => setSelectedPokemon(selected)} />
       </form>
     </div>
   );
