@@ -54,8 +54,8 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
       'bg-purple-500',
       'bg-pink-500',
     ];
-    const currentIndex = selectedPokemons.length % allColors.length;
-    return allColors[currentIndex];
+    const randomIndex = Math.floor(Math.random() * allColors.length);
+    return allColors[randomIndex];
   };
 
   const addToSelectedPokemons = (pokemon: Pokemon) => {
@@ -119,7 +119,7 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
           <button
             key={pokemon.url}
             onClick={() => addToSelectedPokemons(pokemon)}
-            className={`pl-2.5 pr-2.5 pt-0.5 pb-0.5 m-1 rounded-full text-white ${pokemon.colorClass}`}
+            className={`pl-2.5 pr-2.5 pt-0.5 pb-0.5 m-1 rounded-full text-white ${getRandomColor()}`}
           >
             {pokemon.name}
           </button>
