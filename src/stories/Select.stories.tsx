@@ -8,9 +8,20 @@ export default {
   component: Select,
 } as Meta;
 
-const Template: Story<SelectProps> = (args: any) => <Select {...args} />;
+const Template: Story<SelectProps> = (args) => <Select {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  onSelect: (selectedPokemons: Pokemon[]) => console.log('Selected Pokémons:', selectedPokemons),
+  onSelect: (selectedPokemons) => console.log('Selected Pokémons:', selectedPokemons),
+};
+
+Default.parameters = {
+  docs: {
+    description: {
+      component: 'A Pokemon selection component for building teams.',
+    },
+    source: {
+      code: '<Select onSelect={(selectedPokemons) => console.log(selectedPokemons)} />',
+    },
+  },
 };
