@@ -91,7 +91,7 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
 
   return (
     <div>
-      <label htmlFor="selectedPokemon" className="block text-sm font-medium text-gray-700">
+      <label htmlFor="selectedPokemon" className="block mt-4 text-sm font-medium text-gray-700">
         Select Your Team (4 Pokemon):
       </label>
       <div className="relative mt-1 block w-full">
@@ -100,7 +100,7 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
           placeholder="Search Pokémon..."
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          className="p-2 border rounded-md w-full"
+          className="my-2 p-2 w-full font-medium border-2 rounded-md focus:outline-none focus:border-blue-500 hover:border-blue-400"
         />
         <div className="absolute right-0 top-0 mt-2 mr-2 space-x-2 overflow-hidden max-w-full">
           {selectedPokemons.map((pokemon) => (

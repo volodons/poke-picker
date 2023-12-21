@@ -34,32 +34,34 @@ const Form: React.FC = () => {
   return (
     <div className="container mx-auto mt-8">
       <form className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md" onSubmit={handleSubmit(onSubmit)}>
-        <label className="block mb-4">
+        <label className="block mt-4 text-sm font-medium text-gray-700">
           First name:
           <input
-            className="mt-1 p-2 w-full border rounded-md"
+            className={`my-2 p-2 w-full border-2 rounded-md focus:outline-none ${errors.firstName ? 'border-red-500' : 'focus:border-blue-500 hover:border-blue-400'}`}
             {...register("firstName", {
-              required: "First name is required",
+              required: "First name is required.",
               pattern: {
                 value: /^[a-zA-Z]{2,12}$/,
                 message: "First name must be between 2 and 12 characters long, and only alphabetic characters (A-Z, a-z) are allowed."
               }
             })}
+            placeholder="Enter your first name"
           />
           {errors.firstName && <span className="text-red-500">{errors.firstName.message}</span>}
         </label>
 
-        <label className="block mb-4">
+        <label className="block mt-4 text-sm font-medium text-gray-700">
           Last name:
           <input
-            className="mt-1 p-2 w-full border rounded-md"
+            className={`my-2 p-2 w-full border-2 rounded-md focus:outline-none ${errors.lastName ? 'border-red-500' : 'focus:border-blue-500 hover:border-blue-400'}`}
             {...register("lastName", {
-              required: "Last name is required",
+              required: "Last name is required.",
               pattern: {
                 value: /^[a-zA-Z]{2,12}$/,
                 message: "Last name must be between 2 and 12 characters long, and only alphabetic characters (A-Z, a-z) are allowed."
               }
             })}
+            placeholder="Enter your last name"
           />
           {errors.lastName && <span className="text-red-500">{errors.lastName.message}</span>}
         </label>
