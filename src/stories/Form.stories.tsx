@@ -7,7 +7,7 @@ export default {
   component: Form,
 } as Meta;
 
-const Template: Story<FormProps> = (args) => <Form {...args} />;
+const Template: Story = (args: any) => <Form {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};
