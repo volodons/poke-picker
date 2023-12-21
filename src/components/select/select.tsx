@@ -16,11 +16,11 @@ const Select: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://pokeapi.co/api/v2/pokemon');
+        const response = await axios.get('https://pokeapi.co/api/v2/pokemon/');
         setPokemonList(response.data.results);
       } catch (error) {
-        console.error('Error fetching Pokemon data', error);
-        setError('Failed to fetch Pokemon data');
+        console.error("Error fetching Pokemon data:", error);
+        setError("Failed to fetch Pokemon data");
       } finally {
         setLoading(false);
       }
@@ -38,13 +38,19 @@ const Select: React.FC = () => {
   }
 
   return (
-    <label htmlFor="selectedPokemon">
-      Select Your Team (4 Pokemon):
+    <div>
+      <label htmlFor="selectedPokemon" className="block text-sm font-medium text-gray-700">
+        Select Your Team (4 Pokemon):
+      </label>
       <select
         id="selectedPokemon"
         multiple
         {...register('selectedPokemon', { validate: (value) => value.length === 4 })}
-        onChange={() => setValue('selectedPokemon', getValues('selectedPokemon'))}
+        onChange={() => {
+          setValue('selectedPokemon', getValues('selectedPokemon'));
+          onSelect(getValues('selectedPokemon'));
+        }}
+        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
       >
         {pokemonList.map((pokemon) => (
           <option key={pokemon.name} value={pokemon.name}>
@@ -52,7 +58,8 @@ const Select: React.FC = () => {
           </option>
         ))}
       </select>
-    </label>
+      {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+    </div>
   );
 };
 
