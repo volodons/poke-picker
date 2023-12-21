@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
-interface Pokemon {
+export interface Pokemon {
   name: string;
   url: string;
 }
 
-interface SelectProps {
+export interface SelectProps {
   onSelect: (selectedPokemons: string[]) => void;
 }
 
