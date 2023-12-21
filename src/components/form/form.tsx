@@ -1,18 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Select from "../select/select";
+import axios from "axios";
 
 const Form: React.FC = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const [selectedPokemons, setSelectedPokemons] = useState<string[]>([]);
 
-  const onSubmit = (data: any) => {
-    if (selectedPokemons.length === 4) {
-      console.log(`Hello, ${data}`);
-    } else {
-      alert("Please choose exactly 4 pokemons.");
+  const onSubmit = async (data: any) => {
+    try {
+      if (selectedPokemons.length === 4) {
+        const response = await axios.post('https://jsonplaceholder.typicode.com/posts', {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          selectedPokemons: selectedPokemons,
+        });
+        reset();
+        setSelectedPokemons([]);
+      } else {
+        alert('Please choose exactly 4 pokemons.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Failed to submit form. Please try again.');
     }
   };
+
+  useEffect(() => {
+    console.log("Selected Pokemon state changed:", selectedPokemons);
+  }, [selectedPokemons]);
 
   return (
     <div className="container mx-auto mt-8">
@@ -47,7 +63,7 @@ const Form: React.FC = () => {
           {errors.lastName && <span className="text-red-500">{errors.lastName.message}</span>}
         </label>
 
-        <Select onSelect={(selected) => setSelectedPokemons(selected)}/>
+        <Select onSelect={(selectedPokemon) => setSelectedPokemons(selectedPokemon)}/>
 
         <button className="bg-blue-500 text-white p-2 rounded-md" type="submit">Submit</button>
       </form>
