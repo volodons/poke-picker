@@ -69,6 +69,8 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
         const updatedSelectedPokemons = [...selectedPokemons, coloredPokemon];
         setSelectedPokemons(updatedSelectedPokemons);
         onSelect(updatedSelectedPokemons);
+      } else {
+        alert(`${pokemon.name} is already selected!`);
       }
     } else {
       alert("Maximum limit of 4 selected Pokémon reached");
@@ -112,15 +114,15 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
           ))}
         </div>
       </div>
-      <div className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+      <div>
         {filteredPokemonList.map((pokemon) => (
-          <div
+          <button
             key={pokemon.url}
             onClick={() => addToSelectedPokemons(pokemon)}
-            className="cursor-pointer"
+            className={`pl-2.5 pr-2.5 pt-0.5 pb-0.5 m-1 rounded-full text-white ${pokemon.colorClass}`}
           >
             {pokemon.name}
-          </div>
+          </button>
         ))}
       </div>
       {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
