@@ -16,7 +16,8 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedPokemon, setSelectedPokemon] = useState<string[]>([]); // Specify the type as string[]
+  const [selectedPokemon, setSelectedPokemon] = useState<string[]>([]);
+  const [selectedPokemons, setSelectedPokemons] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +43,17 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
     return <p>{error}</p>;
   }
 
+  const addToSelectedPokemons = (pokemon) => {
+    setSelectedPokemons((prevSelectedPokemons) => [...prevSelectedPokemons, pokemon]);
+  };
+
+  const removeFromSelectedPokemons = (urlToRemove: number) => {
+    const updatedSelectedPokemons = selectedPokemons.filter(
+      (selectedPokemon) => selectedPokemon.url !== urlToRemove
+    );
+    setSelectedPokemons(updatedSelectedPokemons);
+  };
+
   return (
     <div>
       <label htmlFor="selectedPokemon" className="block text-sm font-medium text-gray-700">
@@ -50,22 +62,28 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
       <select
         id="selectedPokemon"
         multiple
-        {...register('selectedPokemon', { validate: (value) => value.length === 4 })}
+        {...register('selectedPokemon', {validate: (value) => value.length === 4})}
         onChange={() => {
           setValue('selectedPokemon', getValues('selectedPokemon'));
           setSelectedPokemon(getValues('selectedPokemon'));
-          onSelect(selectedPokemon);
+          onSelect(getValues('selectedPokemon')); // Pass the updated selectedPokemon to onSelect
         }}
         className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
       >
         {pokemonList.map((pokemon) => (
-          <option key={pokemon.name} value={pokemon.name}>
+          <option key={pokemon.url} value={pokemon.name} onClick={() => addToSelectedPokemons(pokemon)}>
             {pokemon.name}
           </option>
         ))}
       </select>
       {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+      {selectedPokemons.map((pokemon) => (
+        <button key={pokemon.url} onClick={() => removeFromSelectedPokemons(pokemon.url)}>
+          {pokemon.name}
+        </button>
+      ))}
     </div>
+
   );
 };
 
