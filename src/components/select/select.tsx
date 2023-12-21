@@ -17,6 +17,7 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedPokemons, setSelectedPokemons] = useState<Pokemon[]>([]);
+  const [searchInput, setSearchInput] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,42 +83,47 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
     onSelect(updatedSelectedPokemons);
   };
 
+  const filteredPokemonList = pokemonList.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
   return (
     <div>
       <label htmlFor="selectedPokemon" className="block text-sm font-medium text-gray-700">
         Select Your Team (4 Pokemon):
       </label>
-      <select
-        id="selectedPokemon"
-        multiple
-        {...register('selectedPokemon', { validate: (value) => value.length === 4 })}
-        onChange={() => {
-          onSelect(getValues('selectedPokemon'));
-        }}
-        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-      >
-        {pokemonList.map((pokemon) => (
-          <option
+      <div className="relative mt-1 block w-full">
+        <input
+          type="text"
+          placeholder="Search Pokémon..."
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          className="p-2 border rounded-md w-full"
+        />
+        <div className="absolute right-0 top-0 mt-2 mr-2 space-x-2 overflow-hidden max-w-full">
+          {selectedPokemons.map((pokemon) => (
+            <button
+              key={pokemon.url}
+              onClick={() => removeFromSelectedPokemons(pokemon.url)}
+              className={`pl-2.5 pr-2.5 pt-0.5 pb-0.5 m-1 rounded-full text-white ${pokemon.colorClass}`}
+            >
+              {pokemon.name}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+        {filteredPokemonList.map((pokemon) => (
+          <div
             key={pokemon.url}
-            value={pokemon.url}
             onClick={() => addToSelectedPokemons(pokemon)}
+            className="cursor-pointer"
           >
             {pokemon.name}
-          </option>
-        ))}
-      </select>
-      {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
-      <div className="mt-4 space-x-2">
-        {selectedPokemons.map((pokemon) => (
-          <button
-            key={pokemon.url}
-            onClick={() => removeFromSelectedPokemons(pokemon.url)}
-            className={`pl-2.5 pr-2.5 pt-0.5 pb-0.5 m-1 rounded-full text-white ${pokemon.colorClass}`}
-          >
-            {pokemon.name} <span className="ml-2">&#10006;</span>
-          </button>
+          </div>
         ))}
       </div>
+      {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
     </div>
   );
 };
