@@ -7,11 +7,16 @@ interface Pokemon {
   url: string;
 }
 
-const Select: React.FC = () => {
+interface SelectProps {
+  onSelect: (selectedPokemon: string[]) => void;
+}
+
+const Select: React.FC<SelectProps> = ({ onSelect }) => {
   const { register, setValue, getValues } = useForm();
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedPokemon, setSelectedPokemon] = useState<string[]>([]); // Specify the type as string[]
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,8 +24,8 @@ const Select: React.FC = () => {
         const response = await axios.get('https://pokeapi.co/api/v2/pokemon/');
         setPokemonList(response.data.results);
       } catch (error) {
-        console.error("Error fetching Pokemon data:", error);
-        setError("Failed to fetch Pokemon data");
+        console.error('Error fetching Pokemon data:', error);
+        setError('Failed to fetch Pokemon data');
       } finally {
         setLoading(false);
       }
@@ -48,7 +53,8 @@ const Select: React.FC = () => {
         {...register('selectedPokemon', { validate: (value) => value.length === 4 })}
         onChange={() => {
           setValue('selectedPokemon', getValues('selectedPokemon'));
-          onSelect(getValues('selectedPokemon'));
+          setSelectedPokemon(getValues('selectedPokemon'));
+          onSelect(selectedPokemon);
         }}
         className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
       >

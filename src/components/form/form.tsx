@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Select from "../select/select";
 
 const Form: React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const [selectedPokemon, setSelectedPokemon] = useState<string[]>([]);
 
   const onSubmit = (data: any) => {
     console.log(`Hello, ${data}`);
