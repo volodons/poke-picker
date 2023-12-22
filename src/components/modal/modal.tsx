@@ -50,6 +50,7 @@ const Modal: React.FC<ModalProps> = ({ selectedPokemons, onClose }) => {
                 <img
                   src={details.sprites.front_default}
                   alt="Pokemon Sprite"
+                  title={details.name}
                   className="w-16 h-16"
                 />
                 <span className="font-bold">{details.name}</span>
