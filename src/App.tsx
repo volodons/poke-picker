@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import Homepage from "./pages/home/Homepage";
 
 function App() {
   return (
-    <div>
-      <p>Welcome to Luna Edge technical interview</p>
-    </div>
+    <>
+      <Homepage />
+    </>
   )
 }
 
-export default App
+export default App;
