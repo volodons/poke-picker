@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Select from "../select/select";
 import axios from "axios";
-import { ChevronDownIcon, StarIcon } from "@heroicons/react/16/solid";
 import SubmitButton from "../submitButton/submitButton";
+import Modal from "../modal/modal";
 
 const Form: React.FC = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const [selectedPokemons, setSelectedPokemons] = useState<string[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onSubmit = async (data: any) => {
     try {
@@ -17,10 +18,7 @@ const Form: React.FC = () => {
           lastName: data.lastName,
           selectedPokemons: selectedPokemons,
         });
-        reset();
-        setSelectedPokemons([]);
-      } else {
-        alert('Please choose exactly 4 pokemons.');
+        setIsModalOpen(true);
       }
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -28,9 +26,9 @@ const Form: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("Selected Pokemon state changed:", selectedPokemons);
-  }, [selectedPokemons]);
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="container mx-auto mt-8">
@@ -73,6 +71,10 @@ const Form: React.FC = () => {
           <SubmitButton onSubmit={handleSubmit(onSubmit)} />
         </div>
       </form>
+
+      {isModalOpen && (
+        <Modal selectedPokemons={selectedPokemons} onClose={closeModal} />
+      )}
     </div>
   );
 };
