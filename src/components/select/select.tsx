@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useForm } from "react-hook-form";
 import { POKE_API_URL } from "../../constants/api/urls";
 
 export interface Pokemon {
@@ -13,7 +12,6 @@ export interface SelectProps {
 }
 
 const Select: React.FC<SelectProps> = ({ onSelect }) => {
-  const { register, setValue, getValues } = useForm();
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -93,7 +91,7 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
   return (
     <div>
       <label htmlFor="selectedPokemon" className="block mt-4 text-sm font-medium text-gray-700">
-        Select Your Team (4 Pokemon):
+        Select Your Team (4 Only):
       </label>
       <div className="relative mt-1 block w-full">
         <input
