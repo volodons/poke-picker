@@ -32,7 +32,7 @@ const Form: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto my-8">
       <form className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md" onSubmit={handleSubmit(onSubmit)}>
         <label className="block mt-4 text-sm font-medium text-gray-700">
           First name:
