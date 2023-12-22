@@ -3,7 +3,7 @@ import axios from "axios";
 import { POKE_API_URL } from "../../constants/api/urls";
 
 export interface ModalProps {
-  selectedPokemons: string[];
+  selectedPokemons: { name: string }[];
   onClose: () => void;
 }
 

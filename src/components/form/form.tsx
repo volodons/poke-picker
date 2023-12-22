@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Select from "../select/select";
 import axios from "axios";
 import SubmitButton from "../submitButton/submitButton";
 import Modal from "../modal/modal";
 import { MOCKUP_API_URL } from "../../constants/api/urls";
+import { Pokemon } from "../select/select";
 
 const Form: React.FC = () => {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
-  const [selectedPokemons, setSelectedPokemons] = useState<string[]>([]);
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [selectedPokemons, setSelectedPokemons] = useState<Pokemon[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onSubmit = async (data: any) => {
@@ -47,7 +48,9 @@ const Form: React.FC = () => {
             })}
             placeholder="Enter your first name"
           />
-          {errors.firstName && <span className="text-red-500">{errors.firstName.message}</span>}
+          {errors.firstName && typeof errors.firstName.message === 'string' && (
+            <span className="text-red-500">{errors.firstName.message}</span>
+          )}
         </label>
 
         <label className="block mt-4 text-sm font-medium text-gray-700">
@@ -63,7 +66,9 @@ const Form: React.FC = () => {
             })}
             placeholder="Enter your last name"
           />
-          {errors.lastName && <span className="text-red-500">{errors.lastName.message}</span>}
+          {errors.lastName && typeof errors.lastName.message === 'string' && (
+            <span className="text-red-500">{errors.lastName.message}</span>
+          )}
         </label>
 
         <Select onSelect={(selectedPokemon) => setSelectedPokemons(selectedPokemon)}/>

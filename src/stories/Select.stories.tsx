@@ -1,5 +1,5 @@
 import React from "react";
-import { Story, Meta } from "@storybook/blocks";
+import { Story, Meta } from "@storybook/react";
 
 import Select, { Pokemon, SelectProps } from "../components/select/select";
 

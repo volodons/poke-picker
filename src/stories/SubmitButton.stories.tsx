@@ -1,5 +1,5 @@
 import React from "react";
-import { Story, Meta } from "@storybook/blocks";
+import { Story, Meta } from "@storybook/react";
 import SubmitButton, { SubmitButtonProps } from "../components/submitButton/submitButton";
 
 export default {
@@ -7,7 +7,7 @@ export default {
   component: SubmitButton,
 } as Meta;
 
-const Template: Story<SubmitButtonProps> = (args: any) => <SubmitButton {...args} />;
+const Template: Story<SubmitButtonProps> = (args) => <SubmitButton {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
@@ -20,7 +20,7 @@ Default.parameters = {
       component: "A button for submitting forms with a star icon and a downward chevron.",
     },
     source: {
-      code: "<SubmitButton onSubmit={() => console.log("Submit clicked!")} />",
+      code: '<SubmitButton onSubmit={() => console.log("Submit clicked!")} />',
     },
   },
 };
