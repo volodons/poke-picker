@@ -22,8 +22,8 @@ const Form: React.FC = () => {
         setIsModalOpen(true);
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
-      alert('Failed to submit form. Please try again.');
+      console.error("Error submitting form:", error);
+      alert("Failed to submit form. Please try again.");
     }
   };
 
@@ -37,7 +37,7 @@ const Form: React.FC = () => {
         <label className="block mt-4 text-sm font-medium text-gray-700">
           First name:
           <input
-            className={`my-2 p-2 w-full border-2 rounded-md focus:outline-none ${errors.firstName ? 'border-red-500' : 'focus:border-blue-500 hover:border-blue-400'}`}
+            className={`my-2 p-2 w-full border-2 rounded-md focus:outline-none ${errors.firstName ? "border-red-500" : "focus:border-blue-500 hover:border-blue-400"}`}
             {...register("firstName", {
               required: "First name is required.",
               pattern: {
@@ -53,7 +53,7 @@ const Form: React.FC = () => {
         <label className="block mt-4 text-sm font-medium text-gray-700">
           Last name:
           <input
-            className={`my-2 p-2 w-full border-2 rounded-md focus:outline-none ${errors.lastName ? 'border-red-500' : 'focus:border-blue-500 hover:border-blue-400'}`}
+            className={`my-2 p-2 w-full border-2 rounded-md focus:outline-none ${errors.lastName ? "border-red-500" : "focus:border-blue-500 hover:border-blue-400"}`}
             {...register("lastName", {
               required: "Last name is required.",
               pattern: {

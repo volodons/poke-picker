@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useForm } from 'react-hook-form';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useForm } from "react-hook-form";
 import { POKE_API_URL } from "../../constants/api/urls";
 
 export interface Pokemon {
@@ -26,8 +26,8 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
         const response = await axios.get(`${POKE_API_URL}`);
         setPokemonList(response.data.results);
       } catch (error) {
-        console.error('Error fetching Pokemon data:', error);
-        setError('Failed to fetch Pokemon data');
+        console.error("Error fetching Pokemon data:", error);
+        setError("Failed to fetch Pokemon data");
       } finally {
         setLoading(false);
       }
@@ -46,14 +46,14 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
 
   const getRandomColor = () => {
     const allColors = [
-      'bg-red-500',
-      'bg-orange-500',
-      'bg-yellow-500',
-      'bg-green-500',
-      'bg-blue-500',
-      'bg-indigo-500',
-      'bg-purple-500',
-      'bg-pink-500',
+      "bg-red-500",
+      "bg-orange-500",
+      "bg-yellow-500",
+      "bg-green-500",
+      "bg-blue-500",
+      "bg-indigo-500",
+      "bg-purple-500",
+      "bg-pink-500",
     ];
     const randomIndex = Math.floor(Math.random() * allColors.length);
     return allColors[randomIndex];

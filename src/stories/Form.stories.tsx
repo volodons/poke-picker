@@ -1,9 +1,9 @@
-import React from 'react';
-import { Story, Meta } from '@storybook/blocks';
-import Form from '../components/form/form';
+import React from "react";
+import { Story, Meta } from "@storybook/blocks";
+import Form from "../components/form/form";
 
 export default {
-  title: 'Components/Form',
+  title: "Components/Form",
   component: Form,
 } as Meta;
 
@@ -15,10 +15,10 @@ Default.args = {};
 Default.parameters = {
   docs: {
     description: {
-      component: 'A form component for capturing user information and selecting Pokemon.',
+      component: "A form component for capturing user information and selecting Pokemon.",
     },
     source: {
-      code: '<Form />',
+      code: "<Form />",
     },
   },
 };
