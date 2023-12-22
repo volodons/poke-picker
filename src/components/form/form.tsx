@@ -4,6 +4,7 @@ import Select from "../select/select";
 import axios from "axios";
 import SubmitButton from "../submitButton/submitButton";
 import Modal from "../modal/modal";
+import { MOCKUP_API_URL } from "../../constants/api/urls";
 
 const Form: React.FC = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -13,7 +14,7 @@ const Form: React.FC = () => {
   const onSubmit = async (data: any) => {
     try {
       if (selectedPokemons.length === 4) {
-        const response = await axios.post('https://jsonplaceholder.typicode.com/posts', {
+        const response = await axios.post(`${MOCKUP_API_URL}`, {
           firstName: data.firstName,
           lastName: data.lastName,
           selectedPokemons: selectedPokemons,

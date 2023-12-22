@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import { POKE_API_URL } from "../../constants/api/urls";
 
 export interface Pokemon {
   name: string;
@@ -22,7 +23,7 @@ const Select: React.FC<SelectProps> = ({ onSelect }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://pokeapi.co/api/v2/pokemon/');
+        const response = await axios.get(`${POKE_API_URL}`);
         setPokemonList(response.data.results);
       } catch (error) {
         console.error('Error fetching Pokemon data:', error);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { POKE_API_URL } from "../../constants/api/urls";
 
 export interface ModalProps {
   selectedPokemons: string[];
@@ -21,7 +22,7 @@ const Modal: React.FC<ModalProps> = ({ selectedPokemons, onClose }) => {
     const fetchPokemonDetails = async () => {
       try {
         const requests = selectedPokemons.map(async (pokemon) => {
-          const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}/`);
+          const response = await axios.get(`${POKE_API_URL}${pokemon.name}`);
           return response.data;
         });
         const pokemonDetails = await Promise.all(requests);
