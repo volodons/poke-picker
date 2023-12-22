@@ -1,9 +1,9 @@
-import Form from "../src/components/form/form";
+import Homepage from "./pages/home/Homepage";
 
 function App() {
   return (
     <>
-      <Form />
+      <Homepage />
     </>
   )
 }
