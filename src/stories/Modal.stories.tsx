@@ -1,5 +1,5 @@
 import React from "react";
-import { Story, Meta } from "@storybook/blocks";
+import { Story, Meta } from "@storybook/react";
 
 import Modal, { ModalProps } from "../components/modal/modal";
 
@@ -12,7 +12,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<ModalProps> = (args: any) => <Modal {...args} />;
+const Template: Story<ModalProps> = (args) => <Modal {...args} />;
 
 export const Default: Story<ModalProps> = Template.bind({});
 Default.args = {
@@ -26,7 +26,7 @@ Default.parameters = {
       component: "A modal component for displaying details of selected Pokémon.",
     },
     source: {
-      code: "<Modal selectedPokemons={[]} onClose={() => console.log("Modal closed")} />",
+      code: '<Modal selectedPokemons={[]} onClose={() => console.log("Modal closed")} />',
     },
   },
 };
@@ -43,7 +43,7 @@ Loading.parameters = {
       component: "A modal component in a loading state.",
     },
     source: {
-      code: "<Modal selectedPokemons={[]} onClose={() => console.log("Modal closed")} />",
+      code: '<Modal selectedPokemons={[]} onClose={() => console.log("Modal closed")} />',
     },
   },
 };
@@ -60,7 +60,7 @@ Empty.parameters = {
       component: "A modal component with no selected Pokémon.",
     },
     source: {
-      code: "<Modal selectedPokemons={[]} onClose={() => console.log("Modal closed")} />",
+      code: '<Modal selectedPokemons={[]} onClose={() => console.log("Modal closed")} />',
     },
   },
 };

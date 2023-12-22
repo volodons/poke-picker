@@ -5,10 +5,11 @@ import { POKE_API_URL } from "../../constants/api/urls";
 export interface Pokemon {
   name: string;
   url: string;
+  colorClass?: string;
 }
 
 export interface SelectProps {
-  onSelect: (selectedPokemons: string[]) => void;
+  onSelect: (selectedPokemons: Pokemon[]) => void;
 }
 
 const Select: React.FC<SelectProps> = ({ onSelect }) => {
