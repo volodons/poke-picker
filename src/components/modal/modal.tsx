@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-interface ModalProps {
+export interface ModalProps {
   selectedPokemons: string[];
   onClose: () => void;
 }
